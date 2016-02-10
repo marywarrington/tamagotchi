@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <title>Tamagotchi</title>
+    </head>
+    <body>
+        <div class="container">
+            <form action="/add_gotchi" method="post">
+                <h2>Make a New Tamagotchi!</h2>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" name="name" id="name">
+                </div>
+                <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-heart"></span>  Submit</button>
+            </form>
+            {% for tamagotchi in tamagotchis %}
+            <div class="well">
+                <h3>{{ tamagotchi.getName }}</h3>
+                <p>Life Status: {{ tamagotchi.getLife }}</p>
+                <p>Age: {{ tamagotchi.getAge }}</p>
+                <p>Food Level: {{ tamagotchi.getFood }}</p>
+                <p>Attention Level: {{ tamagotchi.getAttention }}</p>
+                <p>Sleep Level: {{ tamagotchi.getSleep }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,59 +1,102 @@
 <?php
 class Tamagotchi
 {
-    private $title;
-    private $salary;
-    private $company;
-    private $responsibilities;
-    private $dates;
+    private $name;
+    private $food;
+    private $attention;
+    private $sleep;
+    private $life;
+    private $age;
 
-    function __construct($title, $salary, $company, $responsibilities, $dates)
+    // function __construct($name, $food, $attention, $sleep, $life, $age)
+    // {
+    //     $this->name = $name;
+    //     $this->food = $food;
+    //     $this->attention = $attention;
+    //     $this->sleep = $sleep;
+    //     $this->life = $life;
+    //     $this->age = $age;
+    // }
+    function __construct($name)
     {
-        $this->title = $title;
-        $this->salary = $salary;
-        $this->company = $company;
-        $this->responsibilities = $responsibilities;
-        $this->dates = $dates;
+        $this->name = $name;
+        $this->food = rand (4,10);
+        $this->attention = rand(2,8);
+        $this->sleep = 5;
+        $this->life = true;
+        $this->age = 1;
     }
 
-    function getTitle()
+    function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
-    function getSalary()
+    function getFood()
     {
-        return $this->salary;
+        return $this->food;
     }
 
-    function getCompany()
+    function getAttention()
     {
-        return $this->company;
+        return $this->attention;
     }
 
-    function getResponsibilities()
+    function getSleep()
     {
-        return $this->responsibilities;
+        return $this->sleep;
     }
 
-    function getDates()
+    function getLife()
     {
-        return $this->dates;
+        return $this->life;
+    }
+
+    function getAge()
+    {
+        return $this->age;
     }
 
     function save()
     {
-        array_push($_SESSION['list_of_jobs'], $this);
+        array_push($_SESSION['list_of_tamagotchis'], $this);
+    }
+
+    function age()
+    {
+        $this->foodLose();
+        $this->sleepLose();
+        $this->attentionLose();
+        $this->age += 1;
+        $this->checkLife();
+    }
+    function foodLose()
+    {
+        $this->food -= 1;
+    }
+    function sleepLose()
+    {
+        $this->sleep -= 1;
+    }
+    function attentionLose()
+    {
+        $this->attention -= 1;
+    }
+    function checkLife()
+    {
+        if ($this->age > 10) {
+            $this->life = false;
+        }
     }
 
     static function getAll()
     {
-        return $_SESSION['list_of_jobs'];
+        return $_SESSION['list_of_tamagotchis'];
     }
 
     static function deleteAll()
     {
-        $_SESSION['list_of_jobs'] = array();
+        $_SESSION['list_of_tamagotchis'] = array();
     }
 
 
