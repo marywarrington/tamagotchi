@@ -50,7 +50,6 @@
     });
 
     $app->post('/feed', function() use ($app) {
-        Tamagotchi::ageAll();
         $found = false;
         foreach($_SESSION['list_of_tamagotchis'] as $key => $tamagotchi) {
             if ($tamagotchi->getName() == $_POST['name']) {
@@ -60,6 +59,7 @@
         }
         $tamagotchi_to_feed = $_SESSION['list_of_tamagotchis'][$key];
         $tamagotchi_to_feed->feed();
+        Tamagotchi::ageAll();
 
 
         return $app['twig']->render('home.html.twig', array(
@@ -68,7 +68,6 @@
     });
 
     $app->post('/attend', function() use ($app) {
-        Tamagotchi::ageAll();
         $found = false;
         foreach($_SESSION['list_of_tamagotchis'] as $key => $tamagotchi) {
             if ($tamagotchi->getName() == $_POST['name']) {
@@ -78,6 +77,7 @@
         }
         $tamagotchi_to_attend = $_SESSION['list_of_tamagotchis'][$key];
         $tamagotchi_to_attend->attend();
+        Tamagotchi::ageAll();
 
 
         return $app['twig']->render('home.html.twig', array(
@@ -86,7 +86,6 @@
     });
 
     $app->post('/sleep', function() use ($app) {
-        Tamagotchi::ageAll();
         $found = false;
         foreach($_SESSION['list_of_tamagotchis'] as $key => $tamagotchi) {
             if ($tamagotchi->getName() == $_POST['name']) {
@@ -96,6 +95,7 @@
         }
         $tamagotchi_to_sleep = $_SESSION['list_of_tamagotchis'][$key];
         $tamagotchi_to_sleep->sleep();
+        Tamagotchi::ageAll();
 
 
         return $app['twig']->render('home.html.twig', array(
