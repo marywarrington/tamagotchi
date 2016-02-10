@@ -84,14 +84,27 @@ class Tamagotchi
     }
     function checkLife()
     {
-        if ($this->age > 10) {
+        if ($this->age > 25 && rand(1,100) > 80) {
+            $this->life = false;
+        } elseif ($this->food <= 0 || $this->sleep <= 0 || $this->attention <= 0) {
             $this->life = false;
         }
+        return $this->life;
     }
 
     function feed()
     {
         $this->food = 10;
+    }
+
+    function attend()
+    {
+        $this->attention = 10;
+    }
+
+    function sleep()
+    {
+        $this->sleep = 10;
     }
 
     static function getAll()

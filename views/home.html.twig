@@ -18,15 +18,27 @@
             {% for tamagotchi in tamagotchis %}
             <div class="well">
                 <h3>{{ tamagotchi.getName }}</h3>
-                <p>Life Status: {{ tamagotchi.getLife }}</p>
-                <p>Age: {{ tamagotchi.getAge }}</p>
-                <p>Food Level: {{ tamagotchi.getFood }}
-                    <form action="/feed" method='post'>
-                        <button class="btn btn-info" type="submit" name="name" value="{{ tamagotchi.getName }}">Feed {{ tamagotchi.getName }}</button>
-                    </form>
-                </p>
-                <p>Attention Level: {{ tamagotchi.getAttention }}</p>
-                <p>Sleep Level: {{ tamagotchi.getSleep }}</p>
+                {% if tamagotchi.checkLife %}
+                    <p>Age: {{ tamagotchi.getAge }}</p>
+                    <p>Food Level: {{ tamagotchi.getFood }}
+                        <form action="/feed" method='post'>
+                            <button class="btn btn-info" type="submit" name="name" value="{{ tamagotchi.getName }}">Feed {{ tamagotchi.getName }}</button>
+                        </form>
+                    </p>
+                    <p>Attention Level: {{ tamagotchi.getAttention }}
+                        <form action="/attend" method='post'>
+                            <button class="btn btn-info" type="submit" name="name" value="{{ tamagotchi.getName }}">Give {{ tamagotchi.getName }} Attention!</button>
+                        </form>
+                    </p>
+                    <p>Sleep Level: {{ tamagotchi.getSleep }}
+                        <form action="/sleep" method='post'>
+                            <button class="btn btn-info" type="submit" name="name" value="{{ tamagotchi.getName }}">Put {{ tamagotchi.getName }} to bed!</button>
+                        </form>
+                    </p>
+                {% endif %}
+                {% if not tamagotchi.checkLife %}
+                    <img src="http://s2.quickmeme.com/img/8a/8ab7e5d5fa2c46eb14b4424effb8e31e43632d9efad536d97e0b79e8c3d5759c.jpg">
+                {% endif %}
             </div>
             {% endfor %}
 

@@ -67,5 +67,41 @@
         ));
     });
 
+    $app->post('/attend', function() use ($app) {
+        Tamagotchi::ageAll();
+        $found = false;
+        foreach($_SESSION['list_of_tamagotchis'] as $key => $tamagotchi) {
+            if ($tamagotchi->getName() == $_POST['name']) {
+                $found = true;
+                break;
+            }
+        }
+        $tamagotchi_to_attend = $_SESSION['list_of_tamagotchis'][$key];
+        $tamagotchi_to_attend->attend();
+
+
+        return $app['twig']->render('home.html.twig', array(
+            'tamagotchis' => Tamagotchi::getAll()
+        ));
+    });
+
+    $app->post('/sleep', function() use ($app) {
+        Tamagotchi::ageAll();
+        $found = false;
+        foreach($_SESSION['list_of_tamagotchis'] as $key => $tamagotchi) {
+            if ($tamagotchi->getName() == $_POST['name']) {
+                $found = true;
+                break;
+            }
+        }
+        $tamagotchi_to_sleep = $_SESSION['list_of_tamagotchis'][$key];
+        $tamagotchi_to_sleep->sleep();
+
+
+        return $app['twig']->render('home.html.twig', array(
+            'tamagotchis' => Tamagotchi::getAll()
+        ));
+    });
+
     return $app;
 ?>
