@@ -89,6 +89,11 @@ class Tamagotchi
         }
     }
 
+    function feed()
+    {
+        $this->food = 10;
+    }
+
     static function getAll()
     {
         return $_SESSION['list_of_tamagotchis'];
@@ -97,6 +102,12 @@ class Tamagotchi
     static function deleteAll()
     {
         $_SESSION['list_of_tamagotchis'] = array();
+    }
+    static function ageAll()
+    {
+        foreach ($_SESSION['list_of_tamagotchis'] as $gotchi) {
+            $gotchi->age();
+        }
     }
 
 

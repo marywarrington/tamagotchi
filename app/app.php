@@ -28,5 +28,44 @@
             'tamagotchis' => Tamagotchi::getAll()
         ));
     });
+
+    $app->get('/age', function() use ($app) {
+        $tamagotchis = Tamagotchi::getAll();
+
+        foreach ($tamagotchis as $key => $tamagotchi) {
+            $tamagotchi->age();
+        }
+
+        return $app['twig']->render('home.html.twig', array(
+            'tamagotchis' => Tamagotchi::getAll()
+        ));
+    });
+
+    $app->post('/delete_all', function() use ($app) {
+        Tamagotchi::deleteAll();
+
+        return $app['twig']->render('home.html.twig', array(
+            'tamagotchis' => Tamagotchi::getAll()
+        ));
+    });
+
+    $app->post('/feed', function() use ($app) {
+        Tamagotchi::ageAll();
+        $found = false;
+        foreach($_SESSION['list_of_tamagotchis'] as $key => $tamagotchi) {
+            if ($tamagotchi->getName() == $_POST['name']) {
+                $found = true;
+                break;
+            }
+        }
+        $tamagotchi_to_feed = $_SESSION['list_of_tamagotchis'][$key];
+        $tamagotchi_to_feed->feed();
+
+
+        return $app['twig']->render('home.html.twig', array(
+            'tamagotchis' => Tamagotchi::getAll()
+        ));
+    });
+
     return $app;
 ?>

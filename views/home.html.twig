@@ -14,16 +14,25 @@
                 </div>
                 <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-heart"></span>  Submit</button>
             </form>
+            <p><a class="btn btn-default" href="/age">Age them!</a></p>
             {% for tamagotchi in tamagotchis %}
             <div class="well">
                 <h3>{{ tamagotchi.getName }}</h3>
                 <p>Life Status: {{ tamagotchi.getLife }}</p>
                 <p>Age: {{ tamagotchi.getAge }}</p>
-                <p>Food Level: {{ tamagotchi.getFood }}</p>
+                <p>Food Level: {{ tamagotchi.getFood }}
+                    <form action="/feed" method='post'>
+                        <button class="btn btn-info" type="submit" name="name" value="{{ tamagotchi.getName }}">Feed {{ tamagotchi.getName }}</button>
+                    </form>
+                </p>
                 <p>Attention Level: {{ tamagotchi.getAttention }}</p>
                 <p>Sleep Level: {{ tamagotchi.getSleep }}</p>
             </div>
             {% endfor %}
+
+            <form action="/delete_all" method='post'>
+                <button class="btn btn-danger" type="submit">Delete All</button>
+            </form>
         </div>
     </body>
 </html>
