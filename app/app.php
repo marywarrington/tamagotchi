@@ -1,10 +1,10 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/Job.php";
+    require_once __DIR__."/../src/Tamagotchi.php";
 
     session_start();
-    if (empty($_SESSION['list_of_jobs'])) {
-        $_SESSION['list_of_jobs'] = array();
+    if (empty($_SESSION['list_of_tamagotchi'])) {
+        $_SESSION['list_of_tamagotchi'] = array();
     }
 
     $app = new Silex\Applicatoin();

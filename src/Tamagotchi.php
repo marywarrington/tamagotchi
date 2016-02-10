@@ -1,5 +1,5 @@
 <?php
-class Job
+class Tamagotchi
 {
     private $title;
     private $salary;
@@ -57,14 +57,5 @@ class Job
     }
 
 
-
-
-
 }
-
-
-
-
-
-
 ?>
