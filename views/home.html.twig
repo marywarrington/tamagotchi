@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
         <title>Tamagotchi</title>
     </head>
     <body>
@@ -14,27 +15,35 @@
                 </div>
                 <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-heart"></span>  Submit</button>
             </form>
-            <p><a class="btn btn-default" href="/age">Age them!</a></p>
+            <p><a class="btn btn-default" href="/age">Pass Time!</a></p>
             {% for tamagotchi in tamagotchis %}
             <div class="well">
                 <h3>{{ tamagotchi.getName }}</h3>
                 {% if tamagotchi.checkLife %}
+                    {% if tamagotchi.getFood < 5 or tamagotchi.getSleep < 5 or tamagotchi.getAttention < 5 %}
+                        <img src="http://media.tumblr.com/tumblr_lmokznV7d71qafrh6.png" class="gotchi_image">
+                    {% else %}
+                        <img src="https://images-na.ssl-images-amazon.com/images/G/01/videogames/detail-page/pokemon.blk-wte.tepig.lg.jpg" class="gotchi_image">
+                     {% endif %}
                     <p>Age: {{ tamagotchi.getAge }}</p>
-                    <p>Food Level: {{ tamagotchi.getFood }}
+                    <div class="gotchi_stat">
                         <form action="/feed" method='post'>
                             <button class="btn btn-info" type="submit" name="name" value="{{ tamagotchi.getName }}">Feed {{ tamagotchi.getName }}</button>
                         </form>
-                    </p>
-                    <p>Attention Level: {{ tamagotchi.getAttention }}
+                        <p>Food Level: {{ tamagotchi.getFood }}</p>
+                    </div>
+                    <div class="gotchi_stat">
                         <form action="/attend" method='post'>
                             <button class="btn btn-info" type="submit" name="name" value="{{ tamagotchi.getName }}">Give {{ tamagotchi.getName }} Attention!</button>
                         </form>
-                    </p>
-                    <p>Sleep Level: {{ tamagotchi.getSleep }}
+                        <p>Attention Level: {{ tamagotchi.getAttention }}</p>
+                    </div>
+                    <div class="gotchi_stat">
                         <form action="/sleep" method='post'>
                             <button class="btn btn-info" type="submit" name="name" value="{{ tamagotchi.getName }}">Put {{ tamagotchi.getName }} to bed!</button>
                         </form>
-                    </p>
+                        <p>Sleep Level: {{ tamagotchi.getSleep }}</p>
+                    </div>
                 {% endif %}
                 {% if not tamagotchi.checkLife %}
                     <img src="http://s2.quickmeme.com/img/8a/8ab7e5d5fa2c46eb14b4424effb8e31e43632d9efad536d97e0b79e8c3d5759c.jpg">
